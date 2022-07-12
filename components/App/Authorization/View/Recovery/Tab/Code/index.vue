@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <a href="" v-on:click.prevent="onClickToForm">
+    <a href="" v-on:click.prevent="onClickBack">
       <span>Назад</span>
     </a>
   </div>
@@ -18,33 +18,14 @@
 
 <script setup>
   import requests from '@/requests'
-  import { view as viewOfLogin } from '@/components/App/Authorization/View/Login/state'
-  import { username, password } from '@/components/App/Authorization/View/Login/Tab/Form/state'
-  import access from '@/store/access'
+  import { view as viewOfRecovery } from '@/components/App/Authorization/View/Recovery/state'
+  import { username } from '@/components/App/Authorization/View/Login/Tab/Form/state'
+  import { acceptToken } from './state'
 
   const code = ref( '' )
-  const acceptToken = ref( null )
 
-  const onClickToForm = () => viewOfLogin.value = 'form'
-
-  const login = async () => {
-
-    const body = {
-      username: username.value,
-      password: password.value,
-      accept_token: acceptToken.value
-    }
-
-    try {
-      const response = await requests.login( body )
-      access.value = response.data
-    }
-    
-    catch ( error ) {
-      alert( error.response.errors.message )
-    }
-  }
-
+  const onClickBack = () => viewOfRecovery.value = 'entry'
+  
   const onClickSubmit = async () => {
 
     const body = [ {
@@ -70,15 +51,12 @@
         
       else {
         acceptToken.value = result
+        viewOfRecovery.value = 'form'
       }
     }
     
     catch( error ) {
       alert( error.response.data.errors.message )
-    }
-
-    finally {
-      login()
     }
   }
 </script>

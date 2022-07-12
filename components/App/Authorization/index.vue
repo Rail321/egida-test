@@ -1,6 +1,10 @@
 <template>
   <div>
-    <pre v-if="access">{{ JSON.stringify( access, null, 2 ) }}</pre>
+    <div v-if="access">
+      <pre>{{ JSON.stringify( access, null, 2 ) }}</pre>
+
+      <button type="button" v-on:click.prevent>Удалить</button>
+    </div>
 
     <div v-else>
       <app-authorization-view-login v-if="view === 'login'" />

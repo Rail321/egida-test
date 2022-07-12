@@ -8,7 +8,12 @@ const exec = ( body = {}, options = {} ) => {
   return axios.post( '/tool/exec', body, options )
 }
 
+const recovery = ( body = {}, options = {} ) => {
+  return axios.post( '/auth/jwt/recovery', body, options )
+}
+
 export default {
   login,
-  exec
+  exec,
+  recovery
 }

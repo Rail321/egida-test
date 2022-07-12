@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
-const username = ref( '79000000000' )
-const password = ref( 'tester' )
+const username = ref( '' )
+const password = ref( '' )
 
 export { username, password }
 
